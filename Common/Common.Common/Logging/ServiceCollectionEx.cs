@@ -3,7 +3,7 @@ using Serilog.Events;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Common.Common.Logging
+namespace GT.Trace.Common.Logging
 {
     public static class ServiceCollectionEx
     {

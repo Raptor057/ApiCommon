@@ -1,4 +1,4 @@
-﻿namespace Common.Common
+﻿namespace GT.Trace.Common
 {
     public sealed class SuccessResult<T> : Result<T>, ISuccess<T>
     {

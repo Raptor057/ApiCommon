@@ -1,4 +1,4 @@
-﻿namespace Common.Common
+﻿namespace GT.Trace.Common
 {
     public sealed class ErrorList : List<string>
     {

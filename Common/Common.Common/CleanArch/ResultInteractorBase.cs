@@ -1,4 +1,4 @@
-﻿namespace Common.Common.CleanArch
+﻿namespace GT.Trace.Common.CleanArch
 {
     public abstract class ResultInteractorBase<TRequest, TResult> : IResultInteractor<TRequest, TResult>
         where TRequest : IResultRequest<TResult>

@@ -1,10 +1,10 @@
 ﻿using Microsoft.Extensions.Logging;
 
-namespace Common.Common.CleanArch
+namespace GT.Trace.Common.CleanArch
 {
     public record InteractorPipeline<TRequest, TResponse>(MediatR.IMediator Mediator, ILogger<InteractorPipeline<TRequest, TResponse>> Logger) : MediatR.IPipelineBehavior<TRequest, TResponse>
-           where TRequest : MediatR.IRequest<TResponse>
-           where TResponse : MediatR.INotification
+        where TRequest : MediatR.IRequest<TResponse>
+        where TResponse : MediatR.INotification
     {
         private readonly Type _requestType = typeof(TRequest);
         //public async Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken, MediatR.RequestHandlerDelegate<TResponse> next) //Old
