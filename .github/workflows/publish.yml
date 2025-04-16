@@ -1,0 +1,42 @@
+name: Publish to NuGet
+
+on:
+  push:
+    paths:
+      - 'ApiCommon/GTM.Common/Common/version'
+
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ApiCommon/GTM.Common
+
+    steps:
+    - name: Checkout repo
+      uses: actions/checkout@v4
+
+    - name: Setup .NET SDK
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '8.0.x'
+
+    - name: Read version from file
+      id: version
+      run: |
+        VERSION=$(cat Common/version)
+        echo "VERSION=$VERSION"
+        echo "version=$VERSION" >> $GITHUB_OUTPUT
+
+    - name: Restore dependencies
+      run: dotnet restore GTM.Common.sln
+
+    - name: Build
+      run: dotnet build GTM.Common.sln --configuration Release
+
+    - name: Pack
+      run: |
+        dotnet pack Common/Common.csproj --configuration Release --output ./nupkg -p:PackageVersion=${{ steps.version.outputs.version }}
+
+    - name: Publish to NuGet
+      run: dotnet nuget push ./nupkg/*.nupkg --source https://api.nuget.org/v3/index.json --api-key ${{ secrets.NUGET_API_KEY }}
