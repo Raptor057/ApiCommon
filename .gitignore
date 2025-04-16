@@ -2,6 +2,7 @@
 .vscode/
 *.code-workspace
 .vs/
+.env
 
 # Rider
 .idea/
