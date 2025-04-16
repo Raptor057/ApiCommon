@@ -41,6 +41,9 @@ steps:
     dotnet pack GTM.Common/Common/Common.csproj --configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory) -p:PackageVersion=$(PACKAGE_VERSION)
   displayName: 'Empaquetar NuGet con versión $(PACKAGE_VERSION)'
 
+- script: git config --global http.sslVerify false
+  displayName: 'Desactivar verificación SSL'
+
 - task: NuGetAuthenticate@1
   displayName: 'Autenticar con Azure Artifacts'
 
