@@ -8,7 +8,7 @@ pool:
 
 variables:
   buildConfiguration: 'Release'
-  versionFilePath: 'Common/version'
+  versionFilePath: 'GTM.Common/Common/version'
 
 steps:
 - checkout: self
@@ -30,15 +30,15 @@ steps:
       echo "Versión leída: $version"
 
 - script: |
-    dotnet restore GTM.Common.sln
+    dotnet restore GTM.Common/Common/Common.csproj
   displayName: 'Restaurar dependencias'
 
 - script: |
-    dotnet build GTM.Common.sln --configuration $(buildConfiguration)
-  displayName: 'Compilar solución'
+    dotnet build GTM.Common/Common/Common.csproj --configuration $(buildConfiguration)
+  displayName: 'Compilar proyecto'
 
 - script: |
-    dotnet pack Common/Common.csproj --configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory) -p:PackageVersion=$(PACKAGE_VERSION)
+    dotnet pack GTM.Common/Common/Common.csproj --configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory) -p:PackageVersion=$(PACKAGE_VERSION)
   displayName: 'Empaquetar NuGet con versión $(PACKAGE_VERSION)'
 
 - task: NuGetAuthenticate@1
