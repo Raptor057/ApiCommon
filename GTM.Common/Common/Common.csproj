@@ -12,7 +12,7 @@
     <Company>General Transmissions</Company>
     <Description>Librería común para las APIs de General Transmissions, y Raptor057</Description>
     <PackageLicenseExpression>MIT</PackageLicenseExpression> <!-- Cambia si usas otra -->
-    <RepositoryUrl>https://github.com/Raptor057/common</RepositoryUrl>
+    <RepositoryUrl>https://github.com/Raptor057/ApiCommon</RepositoryUrl>
     <PackageProjectUrl>https://github.com/Raptor057</PackageProjectUrl>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
 
