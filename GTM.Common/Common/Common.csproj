@@ -15,10 +15,12 @@
     <RepositoryUrl>https://github.com/Raptor057/ApiCommon</RepositoryUrl>
     <PackageProjectUrl>https://github.com/Raptor057</PackageProjectUrl>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
 
     </PropertyGroup>
 
     <ItemGroup>
+     <None Include="README.md" Pack="true" PackagePath="\"/>
       <PackageReference Include="MediatR" Version="12.5.0" />
       <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="9.0.4" />
       <PackageReference Include="Microsoft.Extensions.Logging" Version="9.0.4" />
