@@ -3,10 +3,14 @@ trigger:
     include:
       - main
 
+  paths:
+    exclude:
+      - '**/*.md'
+
 pool:
   name: 'Deployment'
   demands:
-    - Agent.Name -equals GT-Traceability-System-Linux
+    - Agent.Name -equals GT-Administration-System-Linux
 
 variables:
   buildConfiguration: 'Release'
