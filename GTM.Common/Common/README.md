@@ -121,4 +121,4 @@ Distribuido bajo licencia MIT. Consulta el archivo [`LICENSE`](https://chatgpt.c
 
 ----------
 
-> Hecho con ❤️ por [Rogelio Arriaga](https://github.com/Raptor057) y el equipo de Desarrolladores de GTM.
+> Hecho con ❤️ por [Rogelio Arriaga](https://www.linkedin.com/in/rogelio-arri/) y  [Marcos Vazquez](https://www.linkedin.com/in/marcosjvc/)
