@@ -4,7 +4,9 @@ trigger:
       - main
 
 pool:
-  name: Default  # Cambia si tu agente tiene otro nombre
+  name: 'Deployment'
+  demands:
+    - Agent.Name -equals GT-Traceability-System-Linux
 
 variables:
   buildConfiguration: 'Release'
