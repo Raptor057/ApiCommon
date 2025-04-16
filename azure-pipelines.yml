@@ -11,6 +11,9 @@ variables:
   versionFilePath: 'Common/version'
 
 steps:
+- checkout: self
+  displayName: 'Clonar repositorio'
+
 - task: UseDotNet@2
   displayName: 'Instalar .NET SDK'
   inputs:
