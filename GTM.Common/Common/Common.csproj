@@ -4,6 +4,18 @@
         <TargetFramework>net8.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
+
+    <!-- METADATOS PARA NUGET -->
+    <PackageId>GTM.Common</PackageId>
+    <Version>(packageVersion)</Version> <!-- Puedes reemplazar con lo que esté en tu version.txt -->
+    <Authors>Rogelio Arriaga</Authors>
+    <Company>General Transmissions</Company>
+    <Description>Librería común para las APIs de General Transmissions, y Raptor057</Description>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression> <!-- Cambia si usas otra -->
+    <RepositoryUrl>https://github.com/Raptor057/common</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/Raptor057</PackageProjectUrl>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+
     </PropertyGroup>
 
     <ItemGroup>
