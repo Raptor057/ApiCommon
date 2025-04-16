@@ -16,7 +16,7 @@ jobs:
   pool:
     name: 'Deployment'
     demands:
-      - Agent.Name -equals GT-Administration-System-Linux
+      - Agent.Name -equals GT-Traceability-System-Linux
 
   steps:
   - task: UseDotNet@2
