@@ -6,7 +6,7 @@
         <Nullable>enable</Nullable>
 
     <!-- METADATOS PARA NUGET -->
-    <PackageId>Common</PackageId>
+    <PackageId>Raptor.Common</PackageId>
     <Version>$(PACKAGE_VERSION)</Version> <!-- Puedes reemplazar con lo que esté en tu version.txt -->
     <Authors>Rogelio Arriaga</Authors>
     <Company>Raptor057</Company>
