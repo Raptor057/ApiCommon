@@ -30,7 +30,7 @@ jobs:
         echo "version=$VERSION" >> $GITHUB_OUTPUT
 
     - name: Restore dependencies
-      run: dotnet restore GTM.Common.sln
+      run: dotnet restore Common.sln
 
     - name: Build
       run: dotnet build Common.sln --configuration Release
