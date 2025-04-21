@@ -6,11 +6,11 @@
         <Nullable>enable</Nullable>
 
     <!-- METADATOS PARA NUGET -->
-    <PackageId>GTM.Common</PackageId>
+    <PackageId>Common</PackageId>
     <Version>$(PACKAGE_VERSION)</Version> <!-- Puedes reemplazar con lo que esté en tu version.txt -->
     <Authors>Rogelio Arriaga</Authors>
-    <Company>General Transmissions</Company>
-    <Description>Librería para las APIs de GT, y Raptor057</Description>
+    <Company>Raptor057</Company>
+    <Description>Library for Raptor057's personal use APIs</Description>
     <PackageLicenseExpression>MIT</PackageLicenseExpression> <!-- Cambia si usas otra -->
     <RepositoryUrl>https://github.com/Raptor057/ApiCommon</RepositoryUrl>
     <PackageProjectUrl>https://github.com/Raptor057</PackageProjectUrl>
