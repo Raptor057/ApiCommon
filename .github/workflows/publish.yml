@@ -33,7 +33,7 @@ jobs:
       run: dotnet restore GTM.Common.sln
 
     - name: Build
-      run: dotnet build GTM.Common.sln --configuration Release
+      run: dotnet build Common.sln --configuration Release
 
     - name: Pack
       run: |
