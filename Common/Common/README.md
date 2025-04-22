@@ -1,6 +1,6 @@
 # Common Library
 
-[![NuGet Version](https://img.shields.io/nuget/v/Raptor.Common.svg?label=NuGet&color=blue)](https://www.nuget.org/packages/Raptor.Common)
+[![NuGet Version](https://img.shields.io/nuget/v/Raptor.Common?label=NuGet&color=blue)](https://www.nuget.org/packages/Raptor.Common)
 
 **Reusable library for building clean, decoupled, and resilient APIs.**
 
