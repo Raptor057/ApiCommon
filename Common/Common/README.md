@@ -128,5 +128,3 @@ Distributed under the MIT License. See the [`LICENSE`](https://chatgpt.com/g/g-p
 ----------
 
 > Built with ❤️ by the development team.
-
-¿Quieres que lo suba a un `README.md` limpio o lo formateamos de alguna forma especial para NuGet?

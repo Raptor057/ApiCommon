@@ -2,12 +2,29 @@ using Microsoft.Extensions.Logging;
 
 namespace Common.CleanArch;
 
+/// <summary>
+/// Pipeline behavior for handling requests and responses.
+/// </summary>
+/// <param name="Mediator"></param>
+/// <param name="Logger"></param>
+/// <typeparam name="TRequest"></typeparam>
+/// <typeparam name="TResponse"></typeparam>
 public record InteractorPipeline<TRequest, TResponse>(MediatR.IMediator Mediator, ILogger<InteractorPipeline<TRequest, TResponse>> Logger) : MediatR.IPipelineBehavior<TRequest, TResponse>
     where TRequest : MediatR.IRequest<TResponse>
     where TResponse : MediatR.INotification
 {
+    /// <summary>
+    /// Handles the request and response.
+    /// </summary>
     private readonly Type _requestType = typeof(TRequest);
-    //public async Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken, MediatR.RequestHandlerDelegate<TResponse> next) //Old
+    
+    /// <summary>
+    /// Handles the request and response.
+    /// </summary>
+    /// <param name="request"></param>
+    /// <param name="next"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     public async Task<TResponse> Handle(TRequest request, MediatR.RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)
     {
         TResponse response;
