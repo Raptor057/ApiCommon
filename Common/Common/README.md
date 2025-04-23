@@ -24,7 +24,8 @@ This package provides components to facilitate the development of modern APIs an
 Install the package from [nuget.org](https://www.nuget.org/packages/Common):
 
 ```bash
-dotnet add package Common
+
+dotnet add package Raptor.Common
 
 ```
 
