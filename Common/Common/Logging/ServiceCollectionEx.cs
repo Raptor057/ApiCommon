@@ -1,34 +1,31 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Serilog;
-using Serilog.Events;
 
 namespace Common.Logging;
 
-/// <summary>
-/// Extension methods for configuring logging services.
-/// </summary>
 public static class ServiceCollectionEx
 {
-    /// <summary>
-    /// Adds logging services to the specified <see cref="IServiceCollection"/>.
-    /// </summary>
-    /// <param name="services"></param>
-    /// <param name="configuration"></param>
-    /// <returns></returns>
-    public static IServiceCollection AddLoggingServices(this IServiceCollection services, IConfigurationRoot configuration)
+    public static IServiceCollection AddLoggingServices(
+        this IServiceCollection services,
+        IConfiguration configuration)
     {
-        return services 
-            .AddLogging(logging =>
-            {
-                var section = configuration.GetSection("CustomLogging"); // Custom logging section
-                var serilogLogger = new LoggerConfiguration() // Serilog logger configuration
-                    .Enrich.WithProperty("Project", section.GetSection("Project").Value) // Enrich with project name
-                    .WriteTo.Seq( // Write to Seq
-                        serverUrl: section.GetSection("SeqUri").Value ?? "", // Seq server URL
-                        restrictedToMinimumLevel: (LogEventLevel)Enum.Parse(typeof(LogEventLevel), section.GetSection("LogEventLevel").Value ?? "")) // Minimum log level
-                    .CreateLogger(); // Create logger
-                logging.AddSerilog(logger: serilogLogger, dispose: true); // Add Serilog to logging
-            });
+        // Bindea sección a CustomLoggingOptions
+        var options = new CustomLoggingOptions();
+        configuration.GetSection("CustomLogging").Bind(options);
+
+        var serilogLogger = new LoggerConfiguration()
+            .Enrich.WithProperty("Project", options.Project)
+            .WriteTo.Seq(
+                serverUrl: options.SeqUri,
+                restrictedToMinimumLevel: options.LogEventLevel)
+            .CreateLogger();
+
+        services.AddLogging(logging =>
+        {
+            logging.AddSerilog(serilogLogger, dispose: true);
+        });
+
+        return services;
     }
 }
