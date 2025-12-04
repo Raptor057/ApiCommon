@@ -41,6 +41,7 @@ public record InteractorPipeline<TRequest, TResponse>(MediatR.IMediator Mediator
             }
             else
             {
+                //object? data = ((dynamic)response).Data;
                 Logger.LogInformation("{@Response}", response);
             }
             await Mediator.Publish(response).ConfigureAwait(false);
