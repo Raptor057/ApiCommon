@@ -17,8 +17,8 @@
     <Company>Raptor057</Company>
     <Description>Library for Raptor057's personal use APIs</Description>
     <PackageLicenseExpression>MIT</PackageLicenseExpression> <!-- Cambia si usas otra -->
-    <RepositoryUrl>https://github.com/Raptor057/ApiCommon</RepositoryUrl>
-    <PackageProjectUrl>https://github.com/Raptor057</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/Raptor057/ApiCommon.git</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/Raptor057/ApiCommon</PackageProjectUrl>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <PackageReadmeFile>README.md</PackageReadmeFile>
 
