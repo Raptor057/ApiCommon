@@ -3,6 +3,9 @@
 All notable changes to this project will be documented in this file.
 This project follows Semantic Versioning.
 
+## [0.0.10] - 2025-12-24
+- Fixed NuGet packing by correcting README package path.
+
 ## [0.0.9] - 2025-12-24
 - Fixed publish pipeline by pinning .NET SDK and forcing valid repository URLs.
 
