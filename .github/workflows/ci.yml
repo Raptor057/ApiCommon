@@ -1,19 +1,16 @@
-name: Publish
+name: CI
 
 on:
   push:
-    tags:
-      - 'v*.*.*'
+  pull_request:
 
 jobs:
-  publish:
+  build-test:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
@@ -25,9 +22,3 @@ jobs:
 
       - name: Test
         run: dotnet test Common.sln --configuration Release --no-restore
-
-      - name: Pack
-        run: dotnet pack Common/Common.csproj --configuration Release -o artifacts
-
-      - name: Publish to NuGet
-        run: dotnet nuget push "artifacts/*.nupkg" --api-key "${{ secrets.NUGET_API_KEY }}" --source "https://api.nuget.org/v3/index.json" --skip-duplicate

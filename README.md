@@ -117,7 +117,7 @@ builder.Services.AddLoggingServices(configuration);
 
 ### Release checklist
 
-1. Update `Common/version`.
+1. Update `Common/version` and `CHANGELOG.md`.
 2. Run `dotnet test Common.sln`.
 3. Run `dotnet pack Common/Common.csproj -c Release`.
 4. Tag the commit: `git tag vX.Y.Z`.
