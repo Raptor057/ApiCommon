@@ -1,59 +1,109 @@
 # Changelog
 
-All notable changes to this project will be documented in this file.
-This project follows Semantic Versioning.
+Cambios de cada version, con lo que hay que hacer para subir. Sigue
+[versionado semantico](https://semver.org/lang/es/): un cambio que rompe sube la mayor.
 
-Since 2.1.0 the package version is the Raptor-Dev-Services/Common tag it was copied from
-(see `docs/adr-nuget/NUGET-0003`).
+La version es la del tag de git (`vX.Y.Z`) y la del paquete `Raptor.Common.*` en nuget.org: el
+mismo numero es el mismo codigo.
+
+## [2.1.2] - 2026-09-24
+
+### Corregido
+- **Una `BusinessRuleException` lanzada de forma sincrona respondia 500 en vez de 400.** El mediator
+  invoca al handler por reflexion, y una excepcion lanzada antes del primer `await` llegaba envuelta
+  en `TargetInvocationException`: ni `InteractorPipeline` ni `UseCoreProblemDetails` la reconocian.
+  Ahora sale de `Send` tal cual se lanzo, sea el handler `async` o no.
+- **Las respuestas de error salian con `Content-Type: application/json`** en vez de
+  `application/problem+json`, en `UseCoreProblemDetails` y en los rechazos de `UseTenantResolution`.
+- **`UseCorrelationId` copiaba el header del cliente sin sanear** a la respuesta y a los logs: un
+  cliente podia meter saltos de linea en los logs (log forging) o inflarlos. Ahora solo se conservan
+  letras, digitos y `- _ . :`, hasta 128 caracteres; si no queda nada, se genera un id nuevo.
+- El log de una excepcion no controlada en el pipeline decia `Error cr�tico` por un problema de
+  codificacion del archivo fuente.
+
+### Agregado
+- Guia de uso completa en `docs/guia/`: instalacion como submodulo y como NuGet, primer endpoint, y
+  una guia por capacidad.
+- Comentarios XML en toda la API publica: el IDE muestra la documentacion de cada tipo y metodo.
+- `CONTRIBUTING.md` y este `CHANGELOG.md`.
+
+### Migracion desde 2.1.1
+Nada que cambiar. Si tenias un `catch (TargetInvocationException)` para esquivar el primer defecto,
+ya no hace falta.
+
+### Problemas conocidos (sin corregir en esta version)
+Comprobados y registrados en el SRS como requisitos que no se cumplen. Como evitarlos esta en las
+guias 06 y 08.
+- Un tenant sin cadena de conexion propia, o fuera del catalogo, recibe la cadena global
+  (REQ-SEC-006).
+- Un host que es una IP resuelve un tenant con la resolucion por subdominio (REQ-SEC-007).
+- `ITenantExecutionContextRunner.RunAsync` deja sin tenant al flujo que lo llama si ese flujo ya
+  tenia uno (REQ-FUNC-009).
+- Las migraciones reintentan tambien los errores de SQL, no solo los de conectividad (REQ-REL-002).
 
 ## [2.1.1] - 2026-09-24
-Synced from Raptor-Dev-Services/Common `v2.1.1` (`bd32469`). 2.1.0 was never published (the
-upload was rejected): its content is included here.
 
-- Security: SQL parameters logged by `DapperSqlDbConnectionBase` are now masked like the pipeline
-  logs (before, an `INSERT` of a user wrote its password hash to the log). `DynamicParameters`
-  included.
-- Security: dictionaries and `ExpandoObject` are masked by key; before, each entry was logged as
-  `{Key, Value}` with the value in clear text.
-- `LICENSE` now comes from Common (same MIT text).
-- Publishing uses NuGet Trusted Publishing (OIDC) instead of a stored API key (`NUGET-0004`).
+### Seguridad
+- Los parametros SQL que registra `DapperSqlDbConnectionBase` se enmascaran como los logs del
+  pipeline. Antes, el `INSERT` de un usuario dejaba su hash de contrasena en el log. Incluye
+  `DynamicParameters`.
+- Los diccionarios y `ExpandoObject` se enmascaran por clave. Antes cada entrada salia como
+  `{Key, Value}` con el valor en claro.
 
-## [2.1.0] - 2026-09-24 (not published)
-Synced from Raptor-Dev-Services/Common `v2.1.0` (`3ed620f`). 2.0.0 was never published: its content
-is included here.
+### Agregado
+- Licencia MIT.
 
-- Adds the requirements specification (`docs/srs.md`) and the architecture decision records of the
-  library (`docs/adr/`), plus the decisions specific to this NuGet mirror (`docs/adr-nuget/`).
-- The package version now matches the Common tag; publish fails if the git tag and `version` differ.
-- BREAKING: the code is now a 1:1 copy of Raptor-Dev-Services/Common.
-- BREAKING: targets net10.0 (was net8.0). MediatR and Newtonsoft.Json are gone; the library
-  ships its own mediator (`Common.Messaging`).
-- BREAKING: split into five packages plus a facade: `Raptor.Common.Contracts`,
-  `Raptor.Common.Messaging`, `Raptor.Common.MultiTenancy`, `Raptor.Common.Infra`,
-  `Raptor.Common.Web`. `Raptor.Common` depends on all five, so existing references keep resolving.
-- Adds Serilog + Seq logging, OpenTelemetry, health checks (PostgreSQL/Redis), HTTP resilience,
-  Dapper/Npgsql data access, multi-tenancy and web helpers.
-- Packaging lives in `Directory.Build.props` and the version in the root `version` file.
-- CI and publish now run the stable-dependencies gate (`scripts/check-prerelease-deps.py`).
+### Migracion desde 2.1.0
+Nada que cambiar.
 
-## [0.0.10] - 2025-12-24
-- Fixed NuGet packing by correcting README package path.
+## [2.1.0] - 2026-09-24
 
-## [0.0.9] - 2025-12-24
-- Fixed publish pipeline by pinning .NET SDK and forcing valid repository URLs.
+### Seguridad
+- `InteractorPipeline` enmascara peticiones y respuestas antes de registrarlas. Antes escribia en
+  claro contrasenas y tokens a nivel `Information`.
 
-## [0.0.8] - 2025-12-24
-- Fixed publish pipeline by pinning .NET SDK and normalizing repository URLs.
+### Cambiado (rompe)
+- `AddObservability` pide el nombre del meter del proyecto: `AddObservability(configuration, meterName)`.
+- Las metricas salen solo por OTLP. Ya no hay exportador de Prometheus ni endpoint `/metrics`
+  ([ADR-0005](docs/adr/0005-metricas-y-trazas-solo-por-otlp.md)).
 
-## [0.0.7] - 2025-12-24
-- Added LICENSE, CHANGELOG, CI workflow, and SourceLink metadata.
-- Enabled XML documentation generation and repository metadata.
+### Agregado
+- `Observability:MetricsOtlpEndpoint`, para mandar las metricas a un destino propio por HTTP.
+- Puerta de dependencias estables (`scripts/check-prerelease-deps.py`).
+- SRS y ADR en `docs/`.
 
-## [0.0.6] - 2025-12-24
-- Flattened library paths into `Common/` and aligned solution structure.
-- Added xUnit test suite and CI-ready structure.
-- Updated documentation and release process.
-- Version is now read from `Common/version` during build.
+### Migracion desde 2.0.0
+1. Pasa el nombre del meter: `builder.Services.AddObservability(builder.Configuration, meterName: "MiApi");`
+2. Quita `app.MapPrometheusScrapingEndpoint()` si lo tenias.
+3. Si Prometheus raspaba `/metrics`: arrancalo con `--web.enable-otlp-receiver` y configura
+   `Observability:MetricsOtlpEndpoint` con su receptor OTLP
+   (`http://prometheus:9090/api/v1/otlp/v1/metrics`).
 
-## [0.0.5] - 2025-12-24
-- Previous internal release.
+## [2.0.0] - 2026-06-04
+
+### Cambiado (rompe)
+- `Common` se divide en cinco ensamblados mas una facade: `Common.Contracts`, `Common.Messaging`,
+  `Common.MultiTenancy`, `Common.Infra`, `Common.Web` y `Common`
+  ([ADR-0001](docs/adr/0001-dividir-en-sub-librerias-con-facade.md)).
+
+### Migracion desde 1.1.0
+- **Sin cambios de codigo:** los namespaces son los mismos. Quien referencia `Common.csproj` sigue
+  compilando.
+- Opcional: cambia la referencia a la facade por las sub-librerias que use cada capa (tabla en el
+  README).
+
+## [1.1.0] - 2026-05-11
+
+### Agregado
+- Multi-tenancy: resolucion por header, query string o subdominio; catalogo de tenants por
+  configuracion; contexto ambiental; ejecucion fuera de HTTP; propagacion a `HttpClient`.
+- Fabricas de conexion (fija, por tipo marcador, por tenant, por tenant actual) y sus variantes Npgsql.
+- `IDapperSqlDbConnection` y `DapperSqlDbConnectionBase`: Dapper con medicion de tiempo y logging.
+- Migraciones SQL al arranque (`AddSchemaMigrations`) y health check de PostgreSQL.
+
+## [1.0.0] - 2026-02-22
+
+Primera version: resultados estandar, `BusinessRuleException` y `ErrorList`, mediator propio con
+`InteractorPipeline`, `ResultViewModel`, middlewares de correlacion y ProblemDetails, logging con
+Serilog y Seq, trazas y metricas con OpenTelemetry, health checks, resiliencia HTTP y opciones
+validadas.

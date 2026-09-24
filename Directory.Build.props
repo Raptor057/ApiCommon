@@ -1,7 +1,7 @@
 <Project>
   <!--
     Empaquetado NuGet propio de ApiCommon. El codigo del repo es copia 1:1 de
-    Raptor-Dev-Services/Common: este archivo, `version`, CHANGELOG.md, .github/ y
+    Raptor-Dev-Services/Common: este archivo, `version`, CHANGELOG-NUGET.md, .github/ y
     docs/adr-nuget/ son lo unico que no viene de alla, para que sincronizar sea copiar encima
     (docs/adr-nuget/NUGET-0001).
 

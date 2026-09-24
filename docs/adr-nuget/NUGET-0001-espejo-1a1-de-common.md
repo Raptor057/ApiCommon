@@ -60,3 +60,10 @@ mas borrar lo que Common haya borrado, y comprobar que cada blob coincide con el
 
 > **Nota posterior (2026-09-24, v2.1.1).** Common agrego su propio `LICENSE` (MIT, el mismo texto),
 > asi que `LICENSE` deja de ser un archivo propio del espejo y llega con la sincronizacion.
+
+> **Nota posterior (2026-09-24, v2.1.2).** Common agrego su propio `CHANGELOG.md`, y la primera
+> sincronizacion lo piso. La historia del espejo (empaquetado y publicacion) vive desde entonces en
+> `CHANGELOG-NUGET.md`; `CHANGELOG.md` llega de Common como cualquier otro archivo.
+>
+> Leccion: antes de copiar encima, revisar si Common trae un archivo nuevo con el mismo nombre que
+> uno propio del espejo: `git -C ../Common diff --name-only --diff-filter=A <tag-anterior> <tag-nuevo>`.
