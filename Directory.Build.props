@@ -1,11 +1,13 @@
 <Project>
   <!--
     Empaquetado NuGet propio de ApiCommon. El codigo del repo es copia 1:1 de
-    Raptor-Dev-Services/Common: este archivo, `version`, LICENSE, CHANGELOG.md y
-    .github/ son lo unico que no viene de alla, para que sincronizar sea copiar encima.
+    Raptor-Dev-Services/Common: este archivo, `version`, LICENSE, CHANGELOG.md, .github/ y
+    docs/adr-nuget/ son lo unico que no viene de alla, para que sincronizar sea copiar encima
+    (docs/adr-nuget/NUGET-0001).
 
     Cada proyecto se publica como Raptor.<Proyecto>: Raptor.Common (la facade) depende
-    de Raptor.Common.Contracts, .Messaging, .MultiTenancy, .Infra y .Web.
+    de Raptor.Common.Contracts, .Messaging, .MultiTenancy, .Infra y .Web (NUGET-0002).
+    `version` lleva el numero del tag de Common que se copio (NUGET-0003).
   -->
   <PropertyGroup>
     <PackageId>Raptor.$(MSBuildProjectName)</PackageId>

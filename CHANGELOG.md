@@ -3,8 +3,17 @@
 All notable changes to this project will be documented in this file.
 This project follows Semantic Versioning.
 
-## [2.0.0] - 2026-09-24
-- BREAKING: the code is now a 1:1 copy of Raptor-Dev-Services/Common (upstream `aedf830`).
+Since 2.1.0 the package version is the Raptor-Dev-Services/Common tag it was copied from
+(see `docs/adr-nuget/NUGET-0003`).
+
+## [2.1.0] - 2026-09-24
+Synced from Raptor-Dev-Services/Common `v2.1.0` (`3ed620f`). 2.0.0 was never published: its content
+is included here.
+
+- Adds the requirements specification (`docs/srs.md`) and the architecture decision records of the
+  library (`docs/adr/`), plus the decisions specific to this NuGet mirror (`docs/adr-nuget/`).
+- The package version now matches the Common tag; publish fails if the git tag and `version` differ.
+- BREAKING: the code is now a 1:1 copy of Raptor-Dev-Services/Common.
 - BREAKING: targets net10.0 (was net8.0). MediatR and Newtonsoft.Json are gone; the library
   ships its own mediator (`Common.Messaging`).
 - BREAKING: split into five packages plus a facade: `Raptor.Common.Contracts`,
