@@ -5,6 +5,12 @@ on:
     tags:
       - 'v*.*.*'
 
+# Trusted Publishing (docs/adr-nuget/NUGET-0004): nuget.org entrega una llave temporal a
+# cambio del token OIDC de este workflow. No hay ninguna llave de NuGet guardada en el repo.
+permissions:
+  contents: read
+  id-token: write
+
 jobs:
   publish:
     runs-on: ubuntu-latest
@@ -39,5 +45,11 @@ jobs:
       - name: Pack
         run: dotnet pack Common.slnx --configuration Release --no-restore -o artifacts
 
+      - name: NuGet login (OIDC)
+        id: nuget-login
+        uses: NuGet/login@v1
+        with:
+          user: ${{ secrets.NUGET_USER }}
+
       - name: Publish to NuGet
-        run: dotnet nuget push "artifacts/*.nupkg" --api-key "${{ secrets.NUGET_API_KEY }}" --source "https://api.nuget.org/v3/index.json" --skip-duplicate
+        run: dotnet nuget push "artifacts/*.nupkg" --api-key "${{ steps.nuget-login.outputs.NUGET_API_KEY }}" --source "https://api.nuget.org/v3/index.json" --skip-duplicate

@@ -6,7 +6,19 @@ This project follows Semantic Versioning.
 Since 2.1.0 the package version is the Raptor-Dev-Services/Common tag it was copied from
 (see `docs/adr-nuget/NUGET-0003`).
 
-## [2.1.0] - 2026-09-24
+## [2.1.1] - 2026-09-24
+Synced from Raptor-Dev-Services/Common `v2.1.1` (`bd32469`). 2.1.0 was never published (the
+upload was rejected): its content is included here.
+
+- Security: SQL parameters logged by `DapperSqlDbConnectionBase` are now masked like the pipeline
+  logs (before, an `INSERT` of a user wrote its password hash to the log). `DynamicParameters`
+  included.
+- Security: dictionaries and `ExpandoObject` are masked by key; before, each entry was logged as
+  `{Key, Value}` with the value in clear text.
+- `LICENSE` now comes from Common (same MIT text).
+- Publishing uses NuGet Trusted Publishing (OIDC) instead of a stored API key (`NUGET-0004`).
+
+## [2.1.0] - 2026-09-24 (not published)
 Synced from Raptor-Dev-Services/Common `v2.1.0` (`3ed620f`). 2.0.0 was never published: its content
 is included here.
 

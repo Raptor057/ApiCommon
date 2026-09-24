@@ -57,3 +57,6 @@ mas borrar lo que Common haya borrado, y comprobar que cada blob coincide con el
 - `Directory.Build.props` afecta a todos los proyectos. Si Common agrega el suyo algun dia, chocan y
   hay que mover el empaquetado a un `Directory.Build.targets` o fusionarlos.
 - El `README.md` que se publica en nuget.org es el de Common, escrito para quien usa el submodulo.
+
+> **Nota posterior (2026-09-24, v2.1.1).** Common agrego su propio `LICENSE` (MIT, el mismo texto),
+> asi que `LICENSE` deja de ser un archivo propio del espejo y llega con la sincronizacion.
