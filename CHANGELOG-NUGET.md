@@ -6,7 +6,12 @@ library itself** is in [`CHANGELOG.md`](CHANGELOG.md), which comes 1:1 from Rapt
 Since 2.1.0 the package version is the Raptor-Dev-Services/Common tag it was copied from
 (see `docs/adr-nuget/NUGET-0003`).
 
-## [2.1.2] - 2026-09-24
+## [2.1.3] - 2026-09-24
+Synced from Raptor-Dev-Services/Common `v2.1.3` (`dace97a`). Library changes: see `CHANGELOG.md`
+(security fixes in multi-tenancy; read its migration notes if you use one database per tenant).
+2.1.2 was never published: its content is included here.
+
+## [2.1.2] - 2026-09-24 (not published)
 Synced from Raptor-Dev-Services/Common `v2.1.2` (`83c390f`). Library changes: see `CHANGELOG.md`.
 
 - Common now ships its own `CHANGELOG.md`, so this mirror's history moved here, to
