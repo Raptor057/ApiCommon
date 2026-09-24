@@ -15,10 +15,16 @@ jobs:
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: '8.0.100'
+          dotnet-version: '10.0.x'
+
+      - name: Stable dependencies only
+        run: python3 scripts/check-prerelease-deps.py
 
       - name: Restore
-        run: dotnet restore Common.sln
+        run: dotnet restore Common.slnx
 
       - name: Test
-        run: dotnet test Common.sln --configuration Release --no-restore
+        run: dotnet test Common.slnx --configuration Release --no-restore
+
+      - name: Pack
+        run: dotnet pack Common.slnx --configuration Release --no-restore -o artifacts

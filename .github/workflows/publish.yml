@@ -18,16 +18,26 @@ jobs:
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: '8.0.100'
+          dotnet-version: '10.0.x'
+
+      - name: Tag matches version file
+        run: |
+          expected="v$(tr -d '[:space:]' < version)"
+          if [ "$GITHUB_REF_NAME" != "$expected" ]; then
+            echo "Tag $GITHUB_REF_NAME does not match version file ($expected)"; exit 1
+          fi
+
+      - name: Stable dependencies only
+        run: python3 scripts/check-prerelease-deps.py
 
       - name: Restore
-        run: dotnet restore Common.sln
+        run: dotnet restore Common.slnx
 
       - name: Test
-        run: dotnet test Common.sln --configuration Release --no-restore
+        run: dotnet test Common.slnx --configuration Release --no-restore
 
       - name: Pack
-        run: dotnet pack Common/Common.csproj --configuration Release -o artifacts -p:RepositoryUrl=https://github.com/Raptor057/ApiCommon -p:PackageProjectUrl=https://github.com/Raptor057/ApiCommon
+        run: dotnet pack Common.slnx --configuration Release --no-restore -o artifacts
 
       - name: Publish to NuGet
         run: dotnet nuget push "artifacts/*.nupkg" --api-key "${{ secrets.NUGET_API_KEY }}" --source "https://api.nuget.org/v3/index.json" --skip-duplicate

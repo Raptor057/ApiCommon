@@ -1,0 +1,31 @@
+<Project>
+  <!--
+    Empaquetado NuGet propio de ApiCommon. El codigo del repo es copia 1:1 de
+    Raptor-Dev-Services/Common: este archivo, `version`, LICENSE, CHANGELOG.md y
+    .github/ son lo unico que no viene de alla, para que sincronizar sea copiar encima.
+
+    Cada proyecto se publica como Raptor.<Proyecto>: Raptor.Common (la facade) depende
+    de Raptor.Common.Contracts, .Messaging, .MultiTenancy, .Infra y .Web.
+  -->
+  <PropertyGroup>
+    <PackageId>Raptor.$(MSBuildProjectName)</PackageId>
+    <Version>$([System.IO.File]::ReadAllText('$(MSBuildThisFileDirectory)version').Trim())</Version>
+    <Authors>Rogelio Arriaga</Authors>
+    <Company>Raptor057</Company>
+    <Description>Library for Raptor057's personal use APIs ($(MSBuildProjectName)).</Description>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <RepositoryUrl>https://github.com/Raptor057/ApiCommon</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/Raptor057/ApiCommon</PackageProjectUrl>
+    <RepositoryType>git</RepositoryType>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="$(MSBuildThisFileDirectory)README.md" Pack="true" PackagePath="" Visible="false" />
+  </ItemGroup>
+</Project>
